@@ -10,16 +10,54 @@ import {
   Bot,
 } from "lucide-react";
 
+import { NavLink } from "react-router-dom";
+
 const menu = [
-  { icon: LayoutDashboard, title: "Dashboard" },
-  { icon: Newspaper, title: "My Feed" },
-  { icon: Briefcase, title: "Internships" },
-  { icon: Trophy, title: "Hackathons" },
-  { icon: FileText, title: "Research Papers" },
-  { icon: Code2, title: "GitHub" },
-  { icon: BookOpen, title: "Courses" },
-  { icon: Bookmark, title: "Bookmarks" },
-  { icon: Bot, title: "AI Assistant" },
+  {
+    icon: LayoutDashboard,
+    title: "Dashboard",
+    path: "/",
+  },
+  {
+    icon: Newspaper,
+    title: "My Feed",
+    path: "/feed",
+  },
+  {
+    icon: Briefcase,
+    title: "Internships",
+    path: "/internships",
+  },
+  {
+    icon: Trophy,
+    title: "Hackathons",
+    path: "/hackathons",
+  },
+  {
+    icon: FileText,
+    title: "Research Papers",
+    path: "/research-papers",
+  },
+  {
+    icon: Code2,
+    title: "GitHub",
+    path: "/github",
+  },
+  {
+    icon: BookOpen,
+    title: "Courses",
+    path: "/courses",
+  },
+  {
+    icon: Bookmark,
+    title: "Bookmarks",
+    path: "/bookmarks",
+  },
+  {
+    icon: Bot,
+    title: "AI Assistant",
+    path: "/ai-assistant",
+  },
 ];
 
 export default function Sidebar() {
@@ -40,22 +78,26 @@ export default function Sidebar() {
       {/* Navigation */}
       <nav className="mt-6 flex-1 overflow-y-auto">
 
-        {menu.map((item, index) => {
+        {menu.map((item) => {
           const Icon = item.icon;
 
           return (
-            <div
-              key={index}
-              className={`mx-3 mb-2 flex cursor-pointer items-center gap-3 rounded-xl px-4 py-3 transition ${
-                index === 0
-                  ? "bg-violet-600 text-white"
-                  : "text-slate-400 hover:bg-slate-800 hover:text-white"
-              }`}
+            <NavLink
+              key={item.path}
+              to={item.path}
+              end={item.path === "/"}
+              className={({ isActive }) =>
+                `mx-3 mb-2 flex items-center gap-3 rounded-xl px-4 py-3 transition ${
+                  isActive
+                    ? "bg-violet-600 text-white"
+                    : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                }`
+              }
             >
               <Icon size={20} />
 
               <span>{item.title}</span>
-            </div>
+            </NavLink>
           );
         })}
 
