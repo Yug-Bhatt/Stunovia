@@ -1,22 +1,42 @@
 import { Settings2 } from "lucide-react";
 
-const HeaderSection = () => {
+const HeaderSection = ({ profile }) => {
+
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+
+    if (hour < 12) {
+      return "Good Morning";
+    } else if (hour < 17) {
+      return "Good Afternoon";
+    } else if (hour < 21) {
+      return "Good Evening";
+    } else {
+      return "Good Night";
+    }
+  };
+
   return (
     <section className="flex justify-between items-start mb-8">
 
       <div>
+
         <h1 className="text-4xl font-bold">
-          Good Evening, Yug! 👋
+          {getGreeting()}, {profile.name}! 👋
         </h1>
 
         <p className="mt-2 text-lg text-slate-400">
           Here's your personalized tech intelligence for today.
         </p>
+
       </div>
 
       <button className="flex items-center gap-2 rounded-xl border border-slate-700 bg-[#111827] px-5 py-3 transition hover:border-violet-500">
+
         <Settings2 size={18} />
+
         Customize Interests
+
       </button>
 
     </section>

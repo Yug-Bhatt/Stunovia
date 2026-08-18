@@ -1,6 +1,8 @@
 import InterestChip from "../common/InterestChip";
 
-const InterestSection = () => {
+
+const InterestSection = ({ interests }) => {
+
   return (
     <div className="mt-10">
 
@@ -8,19 +10,24 @@ const InterestSection = () => {
         Your Interests
       </h2>
 
+
       <div className="flex flex-wrap gap-3">
 
-        <InterestChip title="AI & ML" active />
-        <InterestChip title="Data Science" />
-        <InterestChip title="Web Development" />
-        <InterestChip title="Cloud Computing" />
-        <InterestChip title="Competitive Programming" />
-        <InterestChip title="+2 More" />
+        {interests.map((interest, index) => (
+
+          <InterestChip
+            key={interest}
+            title={interest}
+            active={index === 0}
+          />
+
+        ))}
 
       </div>
 
     </div>
   );
 };
+
 
 export default InterestSection;

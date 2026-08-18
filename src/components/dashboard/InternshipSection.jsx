@@ -6,31 +6,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-const internships = [
-  {
-    company: "TechNova Labs",
-    title: "AI / ML Intern",
-    location: "Remote",
-    deadline: "Aug 25",
-    match: 94,
-  },
-  {
-    company: "DataSphere",
-    title: "Data Science Intern",
-    location: "Ahmedabad",
-    deadline: "Aug 30",
-    match: 89,
-  },
-  {
-    company: "CloudCore",
-    title: "AI Engineering Intern",
-    location: "Bangalore",
-    deadline: "Sep 05",
-    match: 84,
-  },
-];
-
-const InternshipSection = () => {
+const InternshipSection = ({ opportunities = [] }) => {
   return (
     <div className="rounded-2xl border border-slate-800 bg-[#111827] p-5">
 
@@ -67,59 +43,73 @@ const InternshipSection = () => {
       {/* Internship List */}
       <div className="space-y-3">
 
-        {internships.map((internship) => (
-          <div
-            key={internship.title}
-            className="rounded-xl border border-slate-800 bg-[#0b1220] p-4 transition hover:border-violet-500/40"
-          >
+        {opportunities.length === 0 ? (
 
-            {/* Company + Match */}
-            <div className="flex items-start justify-between gap-3">
-
-              <div className="min-w-0">
-
-                <p className="text-xs font-medium text-violet-400">
-                  {internship.company}
-                </p>
-
-                <h3 className="mt-1 truncate text-sm font-semibold text-white">
-                  {internship.title}
-                </h3>
-
-              </div>
-
-              {/* Match Score */}
-              <div className="shrink-0 text-right">
-
-                <p className="text-[10px] text-slate-500">
-                  Match
-                </p>
-
-                <p className="text-lg font-bold text-green-400">
-                  {internship.match}%
-                </p>
-
-              </div>
-
-            </div>
-
-            {/* Details */}
-            <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-slate-500">
-
-              <span className="flex items-center gap-1">
-                <MapPin size={13} />
-                {internship.location}
-              </span>
-
-              <span className="flex items-center gap-1">
-                <CalendarDays size={13} />
-                {internship.deadline}
-              </span>
-
-            </div>
-
+          <div className="rounded-xl border border-slate-800 bg-[#0b1220] p-4 text-center">
+            <p className="text-sm text-slate-400">
+              No internships available yet.
+            </p>
           </div>
-        ))}
+
+        ) : (
+
+          opportunities.map((opportunity) => (
+
+            <div
+              key={opportunity.id}
+              className="rounded-xl border border-slate-800 bg-[#0b1220] p-4 transition hover:border-violet-500/40"
+            >
+
+              {/* Company + Match */}
+              <div className="flex items-start justify-between gap-3">
+
+                <div className="min-w-0">
+
+                  <p className="text-xs font-medium text-violet-400">
+                    {opportunity.company}
+                  </p>
+
+                  <h3 className="mt-1 truncate text-sm font-semibold text-white">
+                    {opportunity.title}
+                  </h3>
+
+                </div>
+
+                {/* Match Score */}
+                <div className="shrink-0 text-right">
+
+                  <p className="text-[10px] text-slate-500">
+                    Match
+                  </p>
+
+                  <p className="text-lg font-bold text-green-400">
+                    {opportunity.match_score}%
+                  </p>
+
+                </div>
+
+              </div>
+
+              {/* Details */}
+              <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-slate-500">
+
+                <span className="flex items-center gap-1">
+                  <MapPin size={13} />
+                  {opportunity.location || "Not specified"}
+                </span>
+
+                <span className="flex items-center gap-1">
+                  <CalendarDays size={13} />
+                  {opportunity.deadline || "No deadline"}
+                </span>
+
+              </div>
+
+            </div>
+
+          ))
+
+        )}
 
       </div>
 
@@ -152,3 +142,4 @@ const InternshipSection = () => {
 };
 
 export default InternshipSection;
+
