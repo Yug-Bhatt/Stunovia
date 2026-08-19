@@ -16,6 +16,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { getOpportunities } from "../api/opportunities";
+import BorderGlow from "../components/common/BorderGlow";
 
 const MetricBadge = ({ label, value, note, icon: Icon, color = "teal" }) => {
   return (
@@ -250,10 +251,17 @@ const Internships = () => {
       {!loading && !error && filteredOpportunities.length > 0 && (
         <div className="space-y-4">
           {filteredOpportunities.map((opportunity) => (
-            <article
+            <BorderGlow
               key={opportunity.id}
-              className="group rounded-2xl border border-[#E8DFD1] bg-white p-6 shadow-2xs transition-all duration-200 hover:shadow-md hover:border-[#299F95]/50"
+              borderRadius={18}
+              glowColor="175 59 39"
+              colors={["#299F95", "#EAC96B", "#E96D51"]}
+              backgroundColor="#FFFFFF"
+              edgeSensitivity={30}
+              glowRadius={32}
+              glowIntensity={0.85}
             >
+              <article className="group p-6">
               {/* Top Row: Company & Title & Top Badge */}
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div className="min-w-0 flex-1">
@@ -384,7 +392,8 @@ const Internships = () => {
                 )}
               </div>
             </article>
-          ))}
+          </BorderGlow>
+        ))}
         </div>
       )}
     </div>

@@ -1,5 +1,6 @@
 import { Bell, Search, Menu, Sparkles, PanelLeft, PanelLeftClose } from "lucide-react";
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
 
 export default function Navbar({
   onMenuClick = () => {},
@@ -8,8 +9,8 @@ export default function Navbar({
 }) {
   return (
     <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center justify-between glass-header px-6 sm:px-8 animate-fadeIn">
-      {/* Left: Sidebar Toggle (Desktop & Mobile) & Global Search */}
-      <div className="flex items-center gap-3 flex-1 max-w-xl">
+      {/* Left: Sidebar Toggle (Desktop & Mobile), Brand (when collapsed) & Global Search */}
+      <div className="flex items-center gap-3 flex-1 max-w-2xl">
         {/* Mobile menu hamburger */}
         <button
           onClick={onMenuClick}
@@ -19,15 +20,24 @@ export default function Navbar({
           <Menu size={18} />
         </button>
 
-        {/* Desktop sidebar toggle button */}
-        <button
-          onClick={onToggleSidebar}
-          className="hidden lg:flex h-9 w-9 items-center justify-center rounded-lg glass-pill text-[#5F6B70] transition hover:bg-white hover:text-[#17232A] cursor-pointer"
-          title={sidebarOpen ? "Hide Sidebar (⌘S)" : "Show Sidebar (⌘S)"}
-          aria-label="Toggle sidebar"
-        >
-          {sidebarOpen ? <PanelLeftClose size={18} /> : <PanelLeft size={18} className="text-[#299F95]" />}
-        </button>
+        {/* Desktop sidebar restore button (only shown when sidebar is collapsed) */}
+        {!sidebarOpen && (
+          <button
+            onClick={onToggleSidebar}
+            className="hidden lg:flex h-9 w-9 shrink-0 items-center justify-center rounded-lg glass-pill text-[#5F6B70] transition hover:bg-white hover:text-[#299F95] cursor-pointer"
+            title="Show Sidebar (⌘S)"
+            aria-label="Show sidebar"
+          >
+            <PanelLeft size={18} className="text-[#299F95]" />
+          </button>
+        )}
+
+        {/* Brand shown in Navbar when sidebar is hidden on desktop */}
+        {!sidebarOpen && (
+          <Link to="/" className="hidden lg:flex items-center mr-2 transition hover:opacity-90">
+            <Logo variant="compact" iconSize={28} />
+          </Link>
+        )}
 
         {/* Search Bar */}
         <div className="relative w-full">

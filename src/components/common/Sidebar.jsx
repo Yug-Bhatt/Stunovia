@@ -13,9 +13,10 @@ import {
   X,
   PanelLeftClose,
 } from "lucide-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import AnimatedList from "./AnimatedList";
 import GradualBlur from "./GradualBlur";
+import Logo from "./Logo";
 
 const menu = [
   {
@@ -30,7 +31,7 @@ const menu = [
   },
   {
     icon: Briefcase,
-    title: "Internships",
+    title: "Opportunities",
     path: "/internships",
     badge: "Live",
   },
@@ -94,39 +95,29 @@ export default function Sidebar({
     <div className="flex h-full flex-col justify-between">
       {/* Top Brand & Hide/Collapse Action */}
       <div>
-        <div className="flex items-center justify-between px-6 pt-6 pb-4">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#299F95] text-white shadow-xs">
-              <Sparkles size={16} />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold tracking-tight text-[#17232A]">
-                STUNOVIA
-              </h1>
-              <p className="text-[11px] font-medium text-[#5F6B70]">
-                Student Intelligence
-              </p>
-            </div>
-          </div>
+        <div className="flex items-center justify-between px-5 pt-5 pb-3 gap-2">
+          <Link to="/" className="flex items-center min-w-0 transition hover:opacity-90">
+            <Logo variant="full" iconSize={42} />
+          </Link>
 
           {/* Desktop Hide Sidebar Toggle */}
           <button
             onClick={onToggleSidebar}
-            className="hidden lg:flex rounded-lg p-1.5 text-[#5F6B70] transition hover:bg-[#E8DFD1]/50 hover:text-[#17232A] cursor-pointer"
+            className="hidden lg:flex shrink-0 h-8 w-8 items-center justify-center rounded-lg border border-[#E8DFD1] bg-white/80 text-[#5F6B70] shadow-2xs transition hover:border-[#299F95]/50 hover:bg-white hover:text-[#299F95] cursor-pointer"
             title="Hide Sidebar (Shortcut: ⌘S)"
             aria-label="Hide sidebar"
           >
-            <PanelLeftClose size={18} />
+            <PanelLeftClose size={17} />
           </button>
 
           {/* Close button on mobile */}
           {mobileOpen && (
             <button
               onClick={() => setMobileOpen(false)}
-              className="rounded-lg p-1.5 text-[#5F6B70] transition hover:bg-[#E8DFD1]/50 hover:text-[#17232A] lg:hidden cursor-pointer"
+              className="flex shrink-0 h-8 w-8 items-center justify-center rounded-lg border border-[#E8DFD1] bg-white/80 text-[#5F6B70] shadow-2xs transition hover:bg-white hover:text-[#17232A] lg:hidden cursor-pointer"
               aria-label="Close navigation"
             >
-              <X size={18} />
+              <X size={17} />
             </button>
           )}
         </div>
@@ -185,7 +176,7 @@ export default function Sidebar({
     <>
       {/* Desktop Sidebar with collapsible visibility */}
       {sidebarOpen && (
-        <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-[#E8DFD1] bg-[#FAF6EE] lg:flex animate-fadeIn">
+        <aside className="sticky top-0 hidden h-screen w-68 shrink-0 flex-col border-r border-[#E8DFD1] bg-[#FAF6EE] lg:flex animate-fadeIn">
           {sidebarContent}
         </aside>
       )}
