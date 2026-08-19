@@ -1,25 +1,36 @@
-const StatCard = ({ title, value, icon, color }) => {
+const StatCard = ({ title, value, label, icon: Icon, isHero = false }) => {
   return (
-    <div className="bg-[#111827] border border-slate-800 rounded-2xl p-5 hover:border-violet-500 transition-all duration-300">
-      <div className="flex justify-between items-center">
+    <div className="flex flex-col justify-between rounded-2xl glass-card glass-card-hover p-6 transition-all duration-200">
+      <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-slate-400 text-sm">{title}</p>
-
-          <h2 className="text-white text-3xl font-bold mt-2">
-            {value}
-          </h2>
-
-          <p className="text-green-400 text-sm mt-3">
-            +2 new
+          <p className="text-xs font-semibold uppercase tracking-wider text-[#5F6B70]">
+            {title}
           </p>
+          <div className="mt-3">
+            <h3 className="text-3xl font-bold tracking-tight text-[#17232A]">
+              {value}
+            </h3>
+          </div>
         </div>
 
         <div
-          className={`w-14 h-14 rounded-xl flex items-center justify-center ${color}`}
+          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition-colors ${
+            isHero
+              ? "border-[#299F95]/30 bg-[#299F95]/10 text-[#299F95] shadow-2xs"
+              : "border-[#E8DFD1] bg-[#FAF6EE]/80 text-[#5F6B70]"
+          }`}
         >
-          {icon}
+          <Icon size={18} />
         </div>
       </div>
+
+      {label && (
+        <div className="mt-4 pt-3 border-t border-[#F0E8DC]/80">
+          <p className="text-xs text-[#5F6B70]">
+            {label}
+          </p>
+        </div>
+      )}
     </div>
   );
 };

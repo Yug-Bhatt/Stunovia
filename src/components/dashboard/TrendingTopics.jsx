@@ -1,136 +1,77 @@
-import {
-  TrendingUp,
-  ArrowUpRight,
-  Sparkles,
-  Hash,
-} from "lucide-react";
+import { TrendingUp } from "lucide-react";
+import GradualBlur from "../common/GradualBlur";
 
 const topics = [
   {
-    name: "Generative AI",
-    description: "LLMs, AI tools and applications",
-    mentions: "12.4K",
+    rank: 1,
+    name: "Generative AI & LLM Systems",
+    description: "Agent architectures, RAG, and reasoning frameworks",
   },
   {
-    name: "AI Agents",
-    description: "Autonomous AI systems",
-    mentions: "8.7K",
+    rank: 2,
+    name: "Autonomous AI Agents",
+    description: "Multi-agent workflows, tool use, and memory",
   },
   {
-    name: "Machine Learning",
-    description: "New models and techniques",
-    mentions: "6.9K",
+    rank: 3,
+    name: "MLOps & Model Evaluation",
+    description: "Deployment, monitoring, and pipeline latency",
   },
   {
-    name: "MLOps",
-    description: "Deployment and model monitoring",
-    mentions: "4.8K",
+    rank: 4,
+    name: "Fullstack AI Applications",
+    description: "Next.js, FastAPI, vector search, and client UI",
   },
 ];
 
 const TrendingTopics = () => {
   return (
-    <div className="rounded-2xl border border-slate-800 bg-[#111827] p-5">
-
-      {/* Header */}
-      <div className="mb-5 flex items-center justify-between">
-
+    <div className="relative rounded-2xl glass-card p-6 overflow-hidden">
+      {/* Section Header */}
+      <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/10">
-            <TrendingUp
-              size={20}
-              className="text-blue-400"
-            />
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#E8DFD1] bg-[#FAF6EE]/80 text-[#5F6B70]">
+            <TrendingUp size={18} />
           </div>
-
           <div>
-            <h2 className="text-lg font-semibold text-white">
-              Trending Topics
+            <h2 className="text-lg font-bold tracking-tight text-[#17232A]">
+              Trending in Tech & AI
             </h2>
-
-            <p className="text-xs text-slate-500">
-              Popular in tech
-            </p>
           </div>
-
         </div>
-
-        <button className="text-sm text-blue-400 transition hover:text-blue-300">
-          View All
-        </button>
-
       </div>
 
-      {/* Topics */}
-      <div className="space-y-1">
-
-        {topics.map((topic, index) => (
+      {/* Topics List */}
+      <div className="relative space-y-2">
+        {topics.map((topic) => (
           <div
-            key={topic.name}
-            className="group flex items-center gap-3 rounded-xl p-3 transition hover:bg-slate-800/60"
+            key={topic.rank}
+            className="group flex items-start gap-3 rounded-lg border border-transparent p-2.5 transition-all duration-200 hover:border-[#E8DFD1] hover:bg-[#FAF6EE]"
           >
-
-            {/* Number */}
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-800 text-xs font-semibold text-slate-400">
-              {index + 1}
+            {/* Rank Badge */}
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-[#E8DFD1] bg-[#FAF6EE] text-xs font-semibold text-[#17232A]">
+              #{topic.rank}
             </div>
 
-            {/* Topic */}
+            {/* Topic Details */}
             <div className="min-w-0 flex-1">
-
-              <div className="flex items-center gap-2">
-
-                <Hash
-                  size={13}
-                  className="text-blue-400"
-                />
-
-                <h3 className="truncate text-sm font-semibold text-white">
-                  {topic.name}
-                </h3>
-
-              </div>
-
-              <p className="mt-1 truncate text-xs text-slate-500">
+              <h3 className="truncate text-xs font-bold text-[#17232A] group-hover:text-[#299F95] transition-colors">
+                {topic.name}
+              </h3>
+              <p className="mt-0.5 truncate text-[11px] text-[#5F6B70]">
                 {topic.description}
               </p>
-
             </div>
-
-            {/* Mentions */}
-            <div className="shrink-0 text-right">
-
-              <div className="flex items-center gap-1 text-xs text-green-400">
-                <ArrowUpRight size={13} />
-                {topic.mentions}
-              </div>
-
-              <p className="text-[10px] text-slate-600">
-                mentions
-              </p>
-
-            </div>
-
           </div>
         ))}
-
-      </div>
-
-      {/* Footer */}
-      <div className="mt-4 flex items-center gap-2 rounded-xl bg-blue-500/10 p-3">
-
-        <Sparkles
-          size={15}
-          className="shrink-0 text-blue-400"
+        <GradualBlur
+          position="bottom"
+          height="1.5rem"
+          strength={1.2}
+          divCount={3}
+          opacity={0.7}
         />
-
-        <p className="text-xs leading-5 text-slate-400">
-          Trending topics will be personalized using your interests.
-        </p>
-
       </div>
-
     </div>
   );
 };

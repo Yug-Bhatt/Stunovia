@@ -1,33 +1,45 @@
+import { useState } from "react";
 import InterestChip from "../common/InterestChip";
 
+const InterestSection = ({ interests = [] }) => {
+  const [selectedInterest, setSelectedInterest] = useState(null);
 
-const InterestSection = ({ interests }) => {
+  if (!interests || interests.length === 0) {
+    return null;
+  }
 
   return (
-    <div className="mt-10">
+    <section className="rounded-2xl glass-card p-6">
+      <div className="mb-4 flex items-center justify-between">
+        <div>
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-[#5F6B70]">
+            Filter by Tracked Topics
+          </h2>
+        </div>
+        <span className="text-xs text-[#5F6B70]">
+          {interests.length} topics from profile
+        </span>
+      </div>
 
-      <h2 className="mb-5 text-xl font-semibold">
-        Your Interests
-      </h2>
-
-
-      <div className="flex flex-wrap gap-3">
-
-        {interests.map((interest, index) => (
-
+      <div className="flex flex-wrap gap-2">
+        <InterestChip
+          title="All Topics"
+          active={selectedInterest === null}
+          onClick={() => setSelectedInterest(null)}
+        />
+        {interests.map((interest) => (
           <InterestChip
             key={interest}
             title={interest}
-            active={index === 0}
+            active={selectedInterest === interest}
+            onClick={() =>
+              setSelectedInterest(selectedInterest === interest ? null : interest)
+            }
           />
-
         ))}
-
       </div>
-
-    </div>
+    </section>
   );
 };
-
 
 export default InterestSection;

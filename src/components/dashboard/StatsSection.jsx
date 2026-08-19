@@ -1,60 +1,42 @@
 import StatCard from "../common/StatCard";
-
 import {
-  Newspaper,
   Briefcase,
-  Trophy,
-  FileText,
-  Code2,
-  BookOpen,
+  Newspaper,
+  Bookmark,
+  Sparkles,
 } from "lucide-react";
 
-const StatsSection = () => {
+const StatsSection = ({ opportunitiesCount = 0, interestsCount = 0 }) => {
   return (
-    <div className="grid grid-cols-6 gap-5">
-
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
       <StatCard
-        title="News"
-        value="12"
-        icon={<Newspaper size={22} className="text-white" />}
-        color="bg-blue-500"
+        title="Live Opportunities"
+        value={opportunitiesCount > 0 ? opportunitiesCount : "0"}
+        label={opportunitiesCount > 0 ? `${opportunitiesCount} active postings` : "No active postings"}
+        icon={Briefcase}
+        isHero={true}
       />
 
       <StatCard
-        title="Internships"
-        value="4"
-        icon={<Briefcase size={22} className="text-white" />}
-        color="bg-green-500"
-      />
-
-      <StatCard
-        title="Hackathons"
-        value="2"
-        icon={<Trophy size={22} className="text-white" />}
-        color="bg-orange-500"
-      />
-
-      <StatCard
-        title="Research Papers"
-        value="5"
-        icon={<FileText size={22} className="text-white" />}
-        color="bg-violet-500"
-      />
-
-      <StatCard
-        title="GitHub Repos"
+        title="Curated News"
         value="3"
-        icon={<Code2 size={22} className="text-white" />}
-        color="bg-pink-500"
+        label="Updated today"
+        icon={Newspaper}
       />
 
       <StatCard
-        title="Courses"
-        value="2"
-        icon={<BookOpen size={22} className="text-white" />}
-        color="bg-cyan-500"
+        title="Active Topics"
+        value={interestsCount > 0 ? interestsCount : "0"}
+        label="Tracked from profile"
+        icon={Sparkles}
       />
 
+      <StatCard
+        title="Saved Resources"
+        value="0"
+        label="Nothing saved yet"
+        icon={Bookmark}
+      />
     </div>
   );
 };

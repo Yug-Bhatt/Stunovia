@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import NewsCard from "./NewsCard";
+import { Newspaper, ArrowRight } from "lucide-react";
 
 const newsData = [
   {
@@ -10,10 +12,9 @@ const newsData = [
     title: "OpenAI launches GPT-5.5 with major reasoning improvements",
     description:
       "OpenAI introduced GPT-5.5 featuring improved reasoning, coding capabilities, and lower latency for developers.",
-    source: "OpenAI",
+    source: "OpenAI Blog",
     readTime: 5,
   },
-
   {
     id: 2,
     image:
@@ -26,13 +27,12 @@ const newsData = [
     source: "TechCrunch",
     readTime: 7,
   },
-
   {
     id: 3,
     image:
       "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200",
     category: "Research",
-    trending: true,
+    trending: false,
     title: "New AI research pushes the boundaries of mathematical reasoning",
     description:
       "Researchers are developing new AI systems capable of solving increasingly complex mathematical and reasoning problems.",
@@ -43,39 +43,38 @@ const newsData = [
 
 const NewsSection = () => {
   return (
-    <div className="col-span-8">
-
+    <div className="space-y-6">
       {/* Section Header */}
-      <div className="mb-5 flex items-center justify-between">
-
-        <div>
-          <h2 className="text-2xl font-bold">
-            Personalized News
-          </h2>
-
-          <p className="mt-1 text-sm text-slate-400">
-            Latest technology news based on your interests.
-          </p>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-[#E8DFD1] bg-[#FAF6EE] text-[#5F6B70]">
+            <Newspaper size={18} />
+          </div>
+          <div>
+            <h2 className="text-lg font-bold tracking-tight text-[#17232A]">
+              Personalized News & Insights
+            </h2>
+            <p className="text-xs text-[#5F6B70]">
+              Curated technical developments aligned with your profile
+            </p>
+          </div>
         </div>
 
-        <button className="text-sm font-medium text-violet-400 transition hover:text-violet-300">
-          See All
-        </button>
-
+        <Link
+          to="/feed"
+          className="group flex items-center gap-1 text-xs font-semibold text-[#299F95] transition hover:text-[#22847C]"
+        >
+          <span>View All</span>
+          <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+        </Link>
       </div>
 
       {/* News Cards */}
       <div className="space-y-6">
-
         {newsData.map((news) => (
-          <NewsCard
-            key={news.id}
-            news={news}
-          />
+          <NewsCard key={news.id} news={news} />
         ))}
-
       </div>
-
     </div>
   );
 };

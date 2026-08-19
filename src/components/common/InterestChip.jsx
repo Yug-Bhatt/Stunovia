@@ -1,12 +1,14 @@
-const InterestChip = ({ title, active }) => {
+const InterestChip = ({ title, active = false, onClick }) => {
   return (
     <button
-      className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+      onClick={onClick}
+      className={`inline-flex items-center rounded-lg border px-3 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 cursor-pointer ${
         active
-          ? "bg-violet-600 text-white"
-          : "bg-[#111827] text-slate-300 border border-slate-700 hover:border-violet-500"
+          ? "border-[#299F95] bg-[#299F95] text-white shadow-xs"
+          : "border-[#E8DFD1] bg-white text-[#5F6B70] hover:border-[#299F95] hover:text-[#17232A]"
       }`}
     >
+      <span className="mr-1 opacity-60">#</span>
       {title}
     </button>
   );
